@@ -1,21 +1,12 @@
 'use strict';
 
 var assert = require('assert');
-var bowerDirectory = require('bower-directory');
 var buildAmd = require('../../../lib/pipelines/buildAmd');
 var consume = require('stream-consume');
 var sinon = require('sinon');
 var vfs = require('vinyl-fs');
 
 describe('Pipeline - Build AMD', function() {
-  before(function() {
-    sinon.stub(bowerDirectory, 'sync').returns('test/fixtures/bower');
-  });
-
-  after(function() {
-    bowerDirectory.sync.restore();
-  });
-
 	it('should build js files to multiple AMD modules and their source maps', function(done) {
 		var stream = vfs.src('test/fixtures/js/foo.js')
       .pipe(buildAmd());
