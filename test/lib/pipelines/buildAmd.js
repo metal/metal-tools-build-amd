@@ -95,4 +95,17 @@ describe('Pipeline - Build AMD', function() {
       }
 		});
 	});
+
+  it('should preserve relative paths as module ids', function(done) {
+    var stream = vfs.src('test/fixtures/js/relativeImport.js')
+      .pipe(buildAmd());
+
+    stream.on('data', function(file) {
+      if (file.relative === 'metal/test/fixtures/js/relativeImport.js') {
+        var contents = file.contents.toString();
+        assert.notStrictEqual(-1, contents.indexOf('define([\'./foo\']'));
+        done();
+      }
+    });
+  });
 });
