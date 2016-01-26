@@ -1,4 +1,4 @@
-import dep from 'bower:dep/dep.js';
+import dep from 'npm:dep/dep.js';
 
 var foo = 'foo ' + dep;
 export default foo;

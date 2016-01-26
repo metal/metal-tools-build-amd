@@ -1,21 +1,21 @@
 'use strict';
 
 var assert = require('assert');
-var bowerDirectory = require('bower-directory');
 var del = require('del');
 var fs = require('fs');
 var metalToolsBuildAmd = require('../index');
-var path = require('path');
 var sinon = require('sinon');
 var vfs = require('vinyl-fs');
 
 describe('Metal Tools - Build AMD', function() {
+  var originalCwd = process.cwd();
+
   before(function() {
-    sinon.stub(bowerDirectory, 'sync').returns('test/fixtures/bower');
+    process.chdir('test/fixtures');
   });
 
   after(function() {
-    bowerDirectory.sync.restore();
+    process.chdir(originalCwd);
   });
 
   describe('Default src/dest', function() {
@@ -52,15 +52,15 @@ describe('Metal Tools - Build AMD', function() {
 
   	it('should compile specified soy files to multiple AMD modules and source maps', function(done) {
       var stream = metalToolsBuildAmd({
-        base: path.resolve('test/fixtures'),
-        src: 'test/fixtures/js/foo.js',
-        dest: 'test/fixtures/build'
+        base: process.cwd(),
+        src: 'js/foo.js',
+        dest: 'build'
       });
       stream.on('end', function() {
-        assert.ok(fs.existsSync('test/fixtures/build/metal/js/foo.js'));
-        assert.ok(fs.existsSync('test/fixtures/build/metal/js/foo.js.map'));
-        assert.ok(fs.existsSync('test/fixtures/build/dep/dep.js'));
-        assert.ok(fs.existsSync('test/fixtures/build/dep/dep.js.map'));
+        assert.ok(fs.existsSync('build/metal/js/foo.js'));
+        assert.ok(fs.existsSync('build/metal/js/foo.js.map'));
+        assert.ok(fs.existsSync('build/dep/dep.js'));
+        assert.ok(fs.existsSync('build/dep/dep.js.map'));
     		done();
       });
   	});
@@ -68,7 +68,7 @@ describe('Metal Tools - Build AMD', function() {
 });
 
 function deleteBuiltFiles(done) {
-  del('test/fixtures/build').then(function() {
+  del('build').then(function() {
     done();
   });
 }

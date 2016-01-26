@@ -7,8 +7,18 @@ var sinon = require('sinon');
 var vfs = require('vinyl-fs');
 
 describe('Pipeline - Build AMD', function() {
+	var originalCwd = process.cwd();
+
+	before(function() {
+		process.chdir('test/fixtures');
+	});
+
+	after(function() {
+		process.chdir(originalCwd);
+	});
+
 	it('should build js files to multiple AMD modules and their source maps', function(done) {
-		var stream = vfs.src('test/fixtures/js/foo.js')
+		var stream = vfs.src('js/foo.js')
       .pipe(buildAmd());
 
     var files = [];
@@ -32,7 +42,7 @@ describe('Pipeline - Build AMD', function() {
 	});
 
 	it('should use given moduleName for the original source files', function(done) {
-		var stream = vfs.src('test/fixtures/js/foo.js')
+		var stream = vfs.src('js/foo.js')
       .pipe(buildAmd({moduleName: 'foo'}));
 
     var files = [];
@@ -56,7 +66,7 @@ describe('Pipeline - Build AMD', function() {
 	});
 
 	it('should normalize module path separators', function(done) {
-		var stream = vfs.src('test/fixtures/js/foo.js')
+		var stream = vfs.src('js/foo.js')
       .pipe(buildAmd({moduleName: 'foo\\bar'}));
 
     var files = [];
@@ -83,7 +93,7 @@ describe('Pipeline - Build AMD', function() {
     // Supress error due to missing imported file.
     sinon.stub(console, 'warn');
 
-		var stream = vfs.src('test/fixtures/js/moduleAlias.js')
+		var stream = vfs.src('js/moduleAlias.js')
       .pipe(buildAmd());
 
     stream.on('data', function(file) {
@@ -97,7 +107,7 @@ describe('Pipeline - Build AMD', function() {
 	});
 
   it('should preserve relative paths as module ids', function(done) {
-    var stream = vfs.src('test/fixtures/js/relativeImport.js')
+    var stream = vfs.src('js/relativeImport.js')
       .pipe(buildAmd());
 
     stream.on('data', function(file) {
