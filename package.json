@@ -28,6 +28,7 @@
     "babel-preset-metal": "^2.0.0",
     "bower": "^1.7.1",
     "gulp-babel-deps": "^1.1.1",
+    "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-wrapper": "^1.0.0",
