@@ -53,12 +53,12 @@ describe('Metal Tools - Build AMD', function() {
   	it('should compile specified soy files to multiple AMD modules and source maps', function(done) {
       var stream = metalToolsBuildAmd({
         base: process.cwd(),
-        src: 'js/foo.js',
+        src: 'src/js/foo.js',
         dest: 'build'
       });
       stream.on('end', function() {
-        assert.ok(fs.existsSync('build/metal/js/foo.js'));
-        assert.ok(fs.existsSync('build/metal/js/foo.js.map'));
+        assert.ok(fs.existsSync('build/metal/src/js/foo.js'));
+        assert.ok(fs.existsSync('build/metal/src/js/foo.js.map'));
         assert.ok(fs.existsSync('build/dep/dep.js'));
         assert.ok(fs.existsSync('build/dep/dep.js.map'));
     		done();
