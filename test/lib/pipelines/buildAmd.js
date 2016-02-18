@@ -1,6 +1,7 @@
 'use strict';
 
 var assert = require('assert');
+var babelDeps = require('gulp-babel-deps');
 var buildAmd = require('../../../lib/pipelines/buildAmd');
 var consume = require('stream-consume');
 var path = require('path');
@@ -12,6 +13,10 @@ describe('Pipeline - Build AMD', function() {
 
 	before(function() {
 		process.chdir('test/fixtures');
+	});
+
+	beforeEach(function() {
+		babelDeps.clearCache();
 	});
 
 	after(function() {
