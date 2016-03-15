@@ -47,6 +47,31 @@ describe('Pipeline - Build AMD', function() {
 		consume(stream);
 	});
 
+	it('should build js files to multiple AMD modules without their source maps', function(done) {
+		var stream = vfs.src('src/js/foo.js')
+      .pipe(buildAmd({
+				base: path.resolve(),
+				sourceMaps: false
+			}));
+
+    var files = [];
+    stream.on('data', function(file) {
+			files.push(file.relative);
+		});
+		stream.on('end', function() {
+			assert.strictEqual(2, files.length);
+			assert.deepEqual(
+        [
+          'dep/dep.js',
+          'metal/src/js/foo.js'
+        ],
+        files.sort()
+      );
+			done();
+		});
+		consume(stream);
+	});
+
 	it('should build js files correctly when base folder doesn\'t contain node_modules', function(done) {
 		var stream = vfs.src('src/js/foo.js')
       .pipe(buildAmd({base: path.resolve('src')}));
