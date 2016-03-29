@@ -25,7 +25,7 @@
   ],
   "dependencies": {
     "babel-plugin-transform-es2015-modules-amd": "^6.3.13",
-    "babel-preset-metal": "^2.0.0",
+    "babel-preset-metal": "^3.0.0",
     "bower": "^1.7.1",
     "gulp-babel-deps": "^2.0.0",
     "gulp-if": "^2.0.0",
@@ -39,7 +39,6 @@
     "vinyl-fs": "^2.2.1"
   },
   "devDependencies": {
-    "bower-directory": "^1.0.0",
     "del": "^2.1.0",
     "jshint": "^2.7.0",
     "mocha": "^2.2.5",
