@@ -30,7 +30,6 @@
     "bower": "^1.7.1",
     "gulp-babel-deps": "^2.0.0",
     "gulp-if": "^2.0.0",
-    "gulp-replace": "^0.5.4",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-wrapper": "^1.0.0",
     "merge": "^1.2.0",
