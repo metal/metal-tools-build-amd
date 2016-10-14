@@ -31,7 +31,6 @@
     "gulp-babel-deps": "^2.0.0",
     "gulp-if": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-wrapper": "^1.0.0",
     "merge": "^1.2.0",
     "stream-combiner": "^0.2.2",
     "stream-consume": "^0.1.0",
