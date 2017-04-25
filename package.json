@@ -1,6 +1,6 @@
 {
   "name": "metal-tools-build-amd",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Tool that can be used to build metal ES6 js files to AMD format",
   "license": "BSD",
   "repository": "metal/metal-tools-build-amd",
